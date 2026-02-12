@@ -16,10 +16,7 @@ requests는 모듈 전체를 의미하며, 그 안에 핵심적인 역할을 하
 ### 핵심 클래스: Response 객체
 requests.get() 등을 호출하면 반환되는 결과물이 바로
 **Response** 클래스의 인스턴스이다. 이 객체에 서버가 보낸 모든 정보가 담겨 있다.    
-> <img width="650" height="260" alt="image" src="https://github.com/user-attachments/assets/ba945d15-408a-41fc-ae62-dff3c458400a" />  
-> <img width="566" height="263" alt="image" src="https://github.com/user-attachments/assets/3955b98c-69d8-4df7-a975-6257badb0ccd" />
-> <img width="558" height="261" alt="image" src="https://github.com/user-attachments/assets/e59ef384-fafc-44d4-9598-9526c27b9566" />
-> <img width="633" height="223" alt="image" src="https://github.com/user-attachments/assets/a7ef2abd-ad25-4cb1-a646-bc2011516e0b" />
+> <img width="649" height="185" alt="image" src="https://github.com/user-attachments/assets/124da275-ac47-4b73-abb8-914afed50428" />  
 
 
 
