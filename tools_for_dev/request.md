@@ -13,7 +13,7 @@ requests는 모듈 전체를 의미하며, 그 안에 핵심적인 역할을 하
 * requests.delete(url): 데이터 삭제
 <br />
 
-### 핵심 클래스: Response 객체
+### 핵심 클래스: Response
 requests.get() 등을 호출하면 반환되는 결과물이 바로  
 **Response** 클래스의 인스턴스이다. 이 객체에 서버가 보낸 모든 정보가 담겨 있다.    
 <br/>  
@@ -37,6 +37,7 @@ requests.get() 등을 호출하면 반환되는 결과물이 바로
 통신 과정에서 발생한 시간이나 경로를 확인하는 기능
 > <img width="626" height="147" alt="image" src="https://github.com/user-attachments/assets/73337747-e30c-4da7-ac97-3eb0a27e8da2" />
 
+### 핵심 클래스: Session
 
 
 
