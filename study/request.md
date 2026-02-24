@@ -40,6 +40,7 @@ requests.get() 등을 호출하면 반환되는 결과물이 바로
 ### 핵심 클래스: Session
 **1. session의 핵심 기능**  
 > <img width="773" height="453" alt="image" src="https://github.com/user-attachments/assets/d2dd2270-6cdc-4d6a-9cf4-08e83c83d43d" />
+session을 사용하면 서버와 연결을 계속 유지할 수 있어 1회성 요청이 아닌 다회성, 지속적 요청 시에 유리하다.
 
 **2. 요청 전송 메서드(HTTP verb methods)**  
 > <img width="719" height="355" alt="image" src="https://github.com/user-attachments/assets/ce82fa64-3e3e-4501-a074-f89b5054e197" />
