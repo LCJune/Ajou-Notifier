@@ -38,6 +38,38 @@ requests.get() 등을 호출하면 반환되는 결과물이 바로
 > <img width="626" height="147" alt="image" src="https://github.com/user-attachments/assets/73337747-e30c-4da7-ac97-3eb0a27e8da2" />
 
 ### 핵심 클래스: Session
+**1. session의 핵심 기능**  
+> <img width="773" height="453" alt="image" src="https://github.com/user-attachments/assets/d2dd2270-6cdc-4d6a-9cf4-08e83c83d43d" />
+
+**2. 요청 전송 메서드(HTTP verb methods)**  
+> <img width="719" height="355" alt="image" src="https://github.com/user-attachments/assets/ce82fa64-3e3e-4501-a074-f89b5054e197" />
+
+**3. 핵심 범용 메서드**  
+> <img width="738" height="120" alt="image" src="https://github.com/user-attachments/assets/222624bc-7435-40f3-b3dc-820909b57267" />
+> <img width="244" height="243" alt="image" src="https://github.com/user-attachments/assets/b30cda3a-240b-49c9-870c-e21c7fabf7da" />
+
+**4. 세션 설정 관련 메서드**  
+> <img width="678" height="168" alt="image" src="https://github.com/user-attachments/assets/58f38369-ca3e-4397-83c0-6331cbae2adb" />
+
+**5. 중요 속성(필드)**    
+> <img width="521" height="268" alt="image" src="https://github.com/user-attachments/assets/b3d09207-3c10-4b27-9561-98983553dd48" />
+
+**6. 내부 동작 구조**
+Session  
+ ├── request()  
+ │     └── prepare_request()  
+ │     └── send()  
+ │            └── HTTPAdapter  
+ │                    └── urllib3 connection pool  
+
+ **7. 정리**  
+ > <img width="553" height="160" alt="image" src="https://github.com/user-attachments/assets/f1a7334f-e7e6-4f1c-a84a-077f998dc67f" />   
+
+
+
+
+
+
 
 
 
