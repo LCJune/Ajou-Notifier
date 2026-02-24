@@ -12,7 +12,7 @@ requests는 모듈 전체를 의미하며, 그 안에 핵심적인 역할을 하
 * requests.put(url, data=...): 데이터 수정
 * requests.delete(url): 데이터 삭제
 <br />
-
+<br/>
 ### 핵심 클래스: Response
 requests.get() 등을 호출하면 반환되는 결과물이 바로  
 **Response** 클래스의 인스턴스이다. 이 객체에 서버가 보낸 모든 정보가 담겨 있다.    
