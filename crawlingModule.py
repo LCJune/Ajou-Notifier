@@ -28,7 +28,7 @@ def get_ajou_calendar(target_date=None):
         'boardNo': '1021',
         'date': target_date,
         'srCategoryId': '',
-        '_': int(time.time() * 1000)  # 현재 시간을 타임스탬프로 변환
+        '_': int(time.time() * 1000)  # 현재 타임 스탬프를 js나 웹 브라우저에서 사용하는 밀리초(ms)단위로 변환
     }
 
     headers = {
@@ -40,7 +40,7 @@ def get_ajou_calendar(target_date=None):
 
     return response.json()
 
-march_data = get_ajou_calendar()
-for item in march_data.get('data', []):
-    print(f"[{item['startDt']}] {item['articleTitle']}")
+# monthly_calendar = get_ajou_calendar()
+# for item in monthly_calendar.get('data', []):
+#     print(f"[{item['startDt']}] {item['articleTitle']}")
 ```
