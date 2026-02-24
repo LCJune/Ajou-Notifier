@@ -58,13 +58,14 @@ session을 사용하면 서버와 연결을 계속 유지할 수 있어 1회성 
 > <img width="521" height="268" alt="image" src="https://github.com/user-attachments/assets/b3d09207-3c10-4b27-9561-98983553dd48" />
 
 **6. 내부 동작 구조**  
+```python
 Session  
  ├── request()  
  │     └── prepare_request()  
  │     └── send()  
  │            └── HTTPAdapter  
  │                    └── urllib3 connection pool  
-
+```
  **7. 정리**  
  > <img width="553" height="160" alt="image" src="https://github.com/user-attachments/assets/f1a7334f-e7e6-4f1c-a84a-077f998dc67f" />   
 
