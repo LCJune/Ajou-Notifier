@@ -57,7 +57,7 @@ session을 사용하면 서버와 연결을 계속 유지할 수 있어 1회성 
 **5. 중요 속성(필드)**    
 > <img width="521" height="268" alt="image" src="https://github.com/user-attachments/assets/b3d09207-3c10-4b27-9561-98983553dd48" />
 
-**6. 내부 동작 구조**
+**6. 내부 동작 구조**  
 Session  
  ├── request()  
  │     └── prepare_request()  
