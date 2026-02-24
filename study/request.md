@@ -61,10 +61,10 @@ session을 사용하면 서버와 연결을 계속 유지할 수 있어 1회성 
 ```python
 Session  
  ├── request()  
- │     └── prepare_request()  
- │     └── send()  
- │            └── HTTPAdapter  
- │                    └── urllib3 connection pool  
+ │&emsp;&emsp;└── prepare_request()  
+ │&emsp;&emsp;└── send()  
+ │&emsp;&emsp;&emsp;&emsp;└── HTTPAdapter  
+ │&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── urllib3 connection pool  
 ```
  **7. 정리**  
  > <img width="553" height="160" alt="image" src="https://github.com/user-attachments/assets/f1a7334f-e7e6-4f1c-a84a-077f998dc67f" />   
