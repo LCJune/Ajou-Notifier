@@ -1,0 +1,29 @@
+name: Ajou Calendar Notifier
+
+on:
+  schedule:
+    # 매일 아침 9시(KST 기준)에 실행 (UTC 기준이라 00:00이 한국 09:00입니다)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 수동으로도 실행 가능하게 설정
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run script
+        env:
+          # 보안을 위해 슬랙 URL은 비밀 변수로 관리합니다 (4단계 참고)
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python main.py
