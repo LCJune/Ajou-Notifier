@@ -1,8 +1,9 @@
-```python
 import requests
 import time
 from datetime import datetime, timedelta
 import json
+import os
+WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 
 # 알림을 이미 보낸 일정의 ID를 저장 (중복 방지)
 notified_ids = set()
@@ -35,9 +36,6 @@ def check_and_notify():
             notified_ids.add(event_id)
 
 
-# 발급받은 URL을 여기에 넣으세요 (유출되지 않도록 주의!)
-WEBHOOK_URL = "WebHookToken"
-
 def send_slack(msg):
     """슬랙 채널로 메시지 전송"""
     payload = {
@@ -59,13 +57,6 @@ def send_slack(msg):
     except Exception as e:
         print(f"An error occured: {e}")
 
-# 테스트 실행
-send_slack("🚀 학사일정 감시 프로그램이 정상적으로 시작되었습니다!")
-
-# 4. 주기적 실행 (예: 1시간마다)
-while True:
-    print(f"[{datetime.now()}] 스캔 시작...")
+try:
     check_and_notify()
-    time.sleep(3600) # 3600초(1시간) 대기
-
-```
+    
