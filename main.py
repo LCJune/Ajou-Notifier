@@ -57,6 +57,5 @@ def send_slack(msg):
     except Exception as e:
         print(f"An error occured: {e}")
 
-try:
-    check_and_notify()
+check_and_notify()
     
