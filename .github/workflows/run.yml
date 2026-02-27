@@ -26,4 +26,4 @@ jobs:
         env:
           # 보안을 위해 슬랙 URL은 비밀 변수로 관리합니다 (4단계 참고)
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: python main.py
+        run: python calendar.py
