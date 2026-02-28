@@ -27,3 +27,14 @@ jobs:
           # 보안을 위해 슬랙 URL은 비밀 변수로 관리합니다 (4단계 참고)
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python main.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "actions@github.com"
+          # 변경된 파일(DB용 텍스트 파일)들을 스테이징에 추가
+          git add CALENDAR_DB.txt SW_DB.txt || echo "No changes to add"
+          # 변경사항이 있을 때만 커밋 (없으면 에러 없이 종료)
+          git commit -m "Update last post IDs [skip ci]" || echo "No changes to commit"
+          # 내 레포지토리로 반영
+          git push
