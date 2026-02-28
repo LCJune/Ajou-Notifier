@@ -62,7 +62,7 @@ def check_and_notify():
     data = res.json().get('data', [])
 
     now = datetime.now()
-
+    unnotified = []
     for item in data:
         # 3. 날짜 파싱 (예: '2026-03-02')
         event_date = datetime.strptime(item['start'], '%Y-%m-%d')
@@ -76,14 +76,14 @@ def check_and_notify():
         if 6 <= diff.days < 7 and event_id not in notified_ids:
             send_slack(f"🔔 [D-7 알림] {event_title} 일정이 일주일 남았습니다!", mode = 'calendar')
             notified_ids.add(event_id)
-
+            unnotified.append(event_id)
         # 6. 전날(1일) 알림 발송
         elif 0 <= diff.days <= 1:
             send_slack(f"🚨 [D-1 알림] 내일은 {event_title} 입니다!", mode = 'calendar')
             
     # 7. 새로 추가된 글 id 저장            
-    if has_new:
-        save_ids(CALENDAR_DB, current_notified)
+    if len(unnotified) > 0:
+        save_ids(CALENDAR_DB, unnotified)
 
 def get_software_notices():
     # 1. 이전 최신 글 ID 로드
