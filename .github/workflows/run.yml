@@ -28,22 +28,11 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python main.py
-
-      - name: Check for changes
-        id: git-check
+      
+      - name: Commit and Push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # 1. 파일의 마지막 수정 시간 확인 (파이썬이 건드렸다면 시간이 지금이어야 함)
-          ls -l --full-time SW_DB.txt
-          
-          # 2. 강제로 스테이징
-          git add SW_DB.txt CALENDAR_DB.txt
-          
-          # 3. 상태 확인
-          STATUS=$(git status --porcelain)
-          echo "Current Status: $STATUS"
-          
-          # 4. 변경 여부 기록
-          echo "changed=$(echo "$STATUS" | wc -l)" >> $GITHUB_OUTPUT
+          git add CALENDAR_DB.txt SW_DB.txt
+          # 변경사항이 없을 때 에러가 나지 않도록 처리
+          git diff --quiet && git diff --staged --quiet || (git commit -m "📢 Update: 알림 로그 및 txt 파일 갱신" && git push)
