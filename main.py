@@ -1,5 +1,4 @@
 import os
-WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 import requests
 import time
 from datetime import datetime, timedelta
@@ -7,7 +6,7 @@ import json
 from bs4 import BeautifulSoup
 
 # 환경 변수 및 설정
-WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
+WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
 CALENDAR_DB = "CALENDAR_DB.txt"
 SW_DB = "SW_DB.txt"
 
@@ -130,10 +129,10 @@ def get_software_notices():
             msg = f"📣[{now_str}] SW학과 새 소식 ({len(new_posts)}건)!\n\n" + "\n\n".join(new_posts)    
             
         # 3. 최신 글 알림 전송
-        if send_slack(msg, mode='sw'):
-            
-            # 가장 최신글 ID 저장
-            save_ids(SW_DB, [posts_ids[0]])
+        send_slack(msg, mode='sw')
+
+        # 4. 가장 최신글 ID 저장
+        save_ids(SW_DB, [posts_ids[0]])
 
         
     except Exception as e:
