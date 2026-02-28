@@ -1,5 +1,5 @@
 import os
-WEBHOOK_URL = os.evniron.get('SLACK_WEBHOOK_URL')
+WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 import requests
 import time
 from datetime import datetime, timedelta
