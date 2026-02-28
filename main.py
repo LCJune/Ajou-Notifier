@@ -118,7 +118,7 @@ def get_software_notices():
 
         if new_posts:
             now_str = datetime.now().strftime('%Y-%m-%d %H:%M')
-            msg = f"[{now_str}] SW학과 새 소식 ({len(new_posts)}건)!\n\n" + "\n".join(new_posts)    
+            msg = f"[{now_str}] SW학과 새 소식 ({len(new_posts)}건)!\n\n" + "\n\n".join(new_posts)    
             
             # 3. 최신 글 알림 전송
             if send_slack(msg, mode='sw'):
