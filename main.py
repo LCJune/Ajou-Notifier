@@ -24,20 +24,17 @@ def save_ids(filename, ids):
         f.write("\n".join(map(str, ids)))
         
 def send_slack(msg, mode):
-  emoji = ''  
   if mode == 'calendar':
     payload = {
         "text": msg,
         "username": "아주대 봇",  # 슬랙에 표시될 이름
     }
-    emoji = ':calendar:'
   
   if mode == 'sw':
     payload = { 
-      "text": msg, 
+      "text": ':mega:' + msg, 
       "username": "아주대 봇",
     }
-    emoji = ':mega:'
       
   if mode == 'scholar':
     pass
@@ -122,7 +119,7 @@ def get_software_notices():
 
         if new_posts:
             now_str = datetime.now().strftime('%Y-%m-%d %H:%M')
-            msg = f"[{now_str}] SW학과 새 소식 ({len(new_posts)}건)!\n\n" + "\n\n".join(new_posts)    
+            msg = f"📣[{now_str}] SW학과 새 소식 ({len(new_posts)}건)!\n\n" + "\n\n".join(new_posts)    
             
             # 3. 최신 글 알림 전송
             if send_slack(msg, mode='sw'):
