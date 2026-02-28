@@ -62,7 +62,7 @@ def check_and_notify():
     data = res.json().get('data', [])
 
     now = datetime.now()
-    unnotified = []
+    has_new = False
     for item in data:
         # 3. 날짜 파싱 (예: '2026-03-02')
         event_date = datetime.strptime(item['start'], '%Y-%m-%d')
@@ -76,14 +76,13 @@ def check_and_notify():
         if 6 <= diff.days < 7 and event_id not in notified_ids:
             send_slack(f"🔔 [D-7 알림] {event_title} 일정이 일주일 남았습니다!", mode = 'calendar')
             notified_ids.add(event_id)
-            unnotified.append(event_id)
         # 6. 전날(1일) 알림 발송
         elif 0 <= diff.days <= 1:
             send_slack(f"🚨 [D-1 알림] 내일은 {event_title} 입니다!", mode = 'calendar')
             
     # 7. 새로 추가된 글 id 저장            
-    if len(unnotified) > 0:
-        save_ids(CALENDAR_DB, unnotified)
+    if has_new:
+        save_ids(CALENDAR_DB, notified_ids)
 
 def get_software_notices():
     # 1. 이전 최신 글 ID 로드
@@ -98,8 +97,9 @@ def get_software_notices():
         soup = BeautifulSoup(res.text, 'html.parser')
 
         td_list = soup.select('td.responsive03') # 공지를 담고있는 td의 class
-
+        
         new_posts = []
+        posts_ids = []
         for td in td_list:
             a_tag = td.select_one('a')
             if a_tag:
@@ -107,7 +107,7 @@ def get_software_notices():
                 href = a_tag.get('href', '')
                 # 1. 글 번호 추출 (고유 ID)
                 post_id = href.split('num=')[1].split('&')[0] if 'num=' in href else href
-                
+                posts_ids.append(post_id)
                 if post_id == last_sw_id: # 이전에 본 글을 만나면 중단
                     break
 
@@ -123,7 +123,7 @@ def get_software_notices():
             # 3. 최신 글 알림 전송
             if send_slack(msg, mode='sw'):
                 # 가장 최신글 ID 저장
-                save_ids(SW_DB, [new_posts[0].split('num=')[1].split('&')[0]])
+                save_ids(SW_DB, posts_ids[0])
 
         
     except Exception as e:
