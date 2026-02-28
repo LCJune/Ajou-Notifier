@@ -24,18 +24,21 @@ def save_ids(filename, ids):
         f.write("\n".join(map(str, ids)))
         
 def send_slack(msg, mode):
+  emoji = ''  
   if mode == 'calendar':
     payload = {
         "text": msg,
         "username": "아주대 봇",  # 슬랙에 표시될 이름
     }
+    emoji = ':calendar:'
   
   if mode == 'sw':
     payload = { 
       "text": msg, 
       "username": "아주대 봇",
     }
-  
+    emoji = ':mega:'
+      
   if mode == 'scholar':
     pass
 
