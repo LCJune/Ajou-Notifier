@@ -76,6 +76,7 @@ def check_and_notify():
         if 6 <= diff.days < 7 and event_id not in notified_ids:
             send_slack(f"🔔 [D-7 알림] {event_title} 일정이 일주일 남았습니다!", mode = 'calendar')
             notified_ids.add(event_id)
+            has_new = True
         # 6. 전날(1일) 알림 발송
         elif 0 <= diff.days <= 1:
             send_slack(f"🚨 [D-1 알림] 내일은 {event_title} 입니다!", mode = 'calendar')
@@ -123,7 +124,7 @@ def get_software_notices():
             # 3. 최신 글 알림 전송
             if send_slack(msg, mode='sw'):
                 # 가장 최신글 ID 저장
-                save_ids(SW_DB, posts_ids[0])
+                save_ids(SW_DB, [posts_ids[0]])
 
         
     except Exception as e:
