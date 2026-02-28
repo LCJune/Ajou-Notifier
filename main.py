@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 
 # 환경 변수 및 설정
 WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
-CALENDAR_DB = "last_calendar_ids.txt"
-SW_DB = "last_sw_id.txt"
+CALENDAR_DB = "CALENDAR_DB.txt"
+SW_DB = "SW_DB.txt"
 
 # --- 파일에서 기존 ID 로드 함수 ---
 def load_ids(filename):
