@@ -1,10 +1,12 @@
-name: Ajou Calendar Notifier
+name: Ajou Notifier Bot
 
 on:
   schedule:
-    # 매일 아침 9시(KST 기준)에 실행 (UTC 기준이라 00:00이 한국 09:00입니다)
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 수동으로도 실행 가능하게 설정
+    - cron: '0 0 * * *' # 매일 아침 9시(KST)
+  workflow_dispatch: # 수동 실행 버튼
+
+permissions: # [중요] 이 워크플로우에 쓰기 권한을 직접 부여합니다.
+  contents: write
 
 jobs:
   build:
@@ -24,17 +26,20 @@ jobs:
 
       - name: Run script
         env:
-          # 보안을 위해 슬랙 URL은 비밀 변수로 관리합니다 (4단계 참고)
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python main.py
 
-      - name: Commit and Push changes
+      - name: Check for changes
+        id: git-check
         run: |
-          git config --global user.name "GitHub Action Bot"
-          git config --global user.email "actions@github.com"
-          # 변경된 파일(DB용 텍스트 파일)들을 스테이징에 추가
-          git add CALENDAR_DB.txt SW_DB.txt || echo "No changes to add"
-          # 변경사항이 있을 때만 커밋 (없으면 에러 없이 종료)
-          git commit -m "Update last post IDs [skip ci]" || echo "No changes to commit"
-          # 내 레포지토리로 반영
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add CALENDAR_DB.txt SW_DB.txt || true
+          # 변경사항이 있는지 확인하고 결과를 output으로 저장
+          echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+
+      - name: Commit and Push
+        if: steps.git-check.outputs.changed > 0
+        run: |
+          git commit -m "Update DB: $(date +'%Y-%m-%d %H:%M') [skip ci]"
           git push
