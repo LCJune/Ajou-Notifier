@@ -20,8 +20,16 @@ def load_ids(filename):
 
 # --- 파일에 새로운 ID 저장 함수 ---
 def save_ids(filename, ids):
-    with open(filename, 'w') as f:
-        f.write("\n".join(map(str, ids)))
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            if isinstance(ids, (list, set)):
+                content = "\n".join(map(str, ids))
+            else:
+                content = str(ids)
+            f.write(content)
+            print(f"DEBUG: [{filename}] 쓰기 완료! 내용: {content}")
+    except Exception as e:
+        print(f"DEBUG: [{filename}] 쓰기 실패! 에러: {e}")
         
 def send_slack(msg, mode):
   if mode == 'calendar':
@@ -121,10 +129,11 @@ def get_software_notices():
             now_str = datetime.now().strftime('%Y-%m-%d %H:%M')
             msg = f"📣[{now_str}] SW학과 새 소식 ({len(new_posts)}건)!\n\n" + "\n\n".join(new_posts)    
             
-            # 3. 최신 글 알림 전송
-            if send_slack(msg, mode='sw'):
-                # 가장 최신글 ID 저장
-                save_ids(SW_DB, [posts_ids[0]])
+        # 3. 최신 글 알림 전송
+        if send_slack(msg, mode='sw'):
+            
+        # 가장 최신글 ID 저장
+        save_ids(SW_DB, [posts_ids[0]])
 
         
     except Exception as e:
