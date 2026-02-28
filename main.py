@@ -123,7 +123,7 @@ def get_software_notices():
             # 3. 최신 글 알림 전송
             if send_slack(msg, mode='sw'):
                 # 가장 최신글 ID 저장
-                save_ids(SW_DB, [new_posts[0].split('num=')[1].split('&')[0] if 'num=' in new_posts[0] else "temp])
+                save_ids(SW_DB, [new_posts[0].split('num=')[1].split('&')[0]])
 
         
     except Exception as e:
