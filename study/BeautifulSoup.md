@@ -48,7 +48,7 @@ bs4 객체들은 Tree 구조로 연결되어 있기 때문에, 다음과 같은 
 * **형제(sibling)**: 나와 같은 층위에 있는 옆 태그들
 
 따라서 find()나 select() 특정 객체 하나를 잡은 뒤,  
-.parent, .child를 통해 위, 아래로 이동하거나 .find_next_sibling()을 써서 옆으로 이동할 수 있다.  
+.parent, .children를 통해 위, 아래로 이동하거나 .find_next_sibling()을 써서 옆으로 이동할 수 있다.  
 <br />  
 **사용 예시**  
 ```python
@@ -66,6 +66,10 @@ print(type(text_node)) # <class 'bs4.element.NavigableString'>
 
 # 3. 속성(Attribute) 접근 (Tag 객체의 특징)
 print(td_tag['class']) # ['subject'] (리스트로 반환됨)
+
+# 4. 자식 객체 접근
+children_1: td_tag.contents # 자식들을 list로 한 번에 담아 반환한다.(dtype = list)
+children_2: td_tag.children # 자식들을 하나씩 차례로 꺼내올 때 사용한다. 메모리 효율이 좋아 for 문에 적합하다. (dtype = generator)
 ```
 ### tag
 위 4가지 객체 중 가장 중요한 객체로는 **tag**를 뽑을 수 있다.  
