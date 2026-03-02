@@ -36,7 +36,7 @@ BeautifulSoup를 이용해 HTML 등의 문서를 파싱하면, 해당 문서는 
 위 사진에 나온 객체는 모두 **bs4.element** 객체에 포함돼 있다. BeautifulSoup의 find(), select() 등의 메서드를 이용했을 때 반환되는 객체는 모두  
 bs4.element 내에 속해있다.(주로 bs4.element.tag)  
 
-* **tag**: HTML 태그 그 자체(<div>, <a> 등)
+* **tag**: HTML 태그 그 자체('div', 'a' 등)
 * **NavigableString**: 태그 안에 들어있는 순수한 '문자열'
 * **comment**: HTML 주석('')
 * **BeautifulSoup**: 문서 전체를 담고 있는 최상위 객체
