@@ -33,6 +33,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add CALENDAR_DB.txt SW_DB.txt
+          git add CALENDAR_DB.txt SW_DB.txt SCHOLAR_DB.txt
           # 변경사항이 없을 때 에러가 나지 않도록 처리
           git diff --quiet && git diff --staged --quiet || (git commit -m "📢 Update: 알림 로그 및 txt 파일 갱신" && git push)
