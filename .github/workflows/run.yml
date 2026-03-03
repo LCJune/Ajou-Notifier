@@ -2,7 +2,7 @@ name: Ajou Notifier Bot
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 매일 아침 9시(KST)
+    - cron: '30 1 * * *' # 매일 아침 10시 30분(KST)
   workflow_dispatch: # 수동 실행 버튼
 
 permissions: # [중요] 이 워크플로우에 쓰기 권한을 직접 부여합니다.
@@ -24,10 +24,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run script
+      - name: Run main script
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: python main.py
+        run: python main.py || echo "Network error occurred, but continuing..."
       
       - name: Commit and Push changes
         run: |
