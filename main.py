@@ -4,6 +4,8 @@ import time
 from datetime import datetime, timedelta
 import json
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 # 환경 변수 및 설정
 WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
@@ -51,6 +53,15 @@ def send_slack(msg):
   except Exception as e:
       print(f"An error occured: {e}")
 
+def get_session():
+    session = requests.Session()
+    # 재시도 전략 설정: 총 3번 재시도, 지수 백오프(0.3, 0.6, 1.2초 간격) 적용
+    retry = Retry(total=3, backoff_factor=0.3, status_forcelist=[500, 502, 503, 504])
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+    return session
+
 def check_and_notify():
     # 1. 이전 알림 ID 로드
     notified_ids = load_ids(CALENDAR_DB)
@@ -87,12 +98,12 @@ def check_and_notify():
 def get_software_notices():
     # 1. 이전 최신 글 ID 로드
     last_sw_id = list(load_ids(SW_DB))[0] if load_ids(SW_DB) else ""
-
+    session = get_session()
     url = "http://software.ajou.ac.kr/bbs/board.php?tbl=bbs02"
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'}
 
     try:
-        res = requests.get(url, headers=headers, timeout=10)
+        res = session.get(url, headers=headers, timeout=20)
         res.encoding = res.apparent_encoding # 아주대 소웨 게시판은 'euc-kr'
         soup = BeautifulSoup(res.text, 'html.parser')
 
@@ -133,11 +144,12 @@ def get_software_notices():
 
 def get_scholar_notices():
   last_scholar_id = load_ids(SCHOLAR_DB)    
+  session = get_session()
   url = "https://www.ajou.ac.kr/kr/ajou/notice_scholarship.do"
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'}
-
+    
   try:
-    res = requests.get(url, headers=headers, timeout=10)
+    res = session.get(url, headers=headers, timeout=20)
     res.encoding = res.apparent_encoding
     soup = BeautifulSoup(res.text, 'html.parser')
     tr_list = soup.find_all('tr', class_='')
