@@ -89,7 +89,7 @@ def check_and_notify():
             has_new = True
         # 6. 전날(1일) 알림 발송
         elif 0 <= diff.days <= 1:
-            send_slack(f"🚨 [D-1 알림] 내일은 {event_title} 입니다!")
+            send_slack(f"🚨 [D-1 알림] {event_title} 일정이 하루 남았습니다!")
 
     # 7. 새로 추가된 글 id 저장
     if has_new:
