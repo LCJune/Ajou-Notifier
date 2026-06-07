@@ -47,6 +47,7 @@ class baseCrawler(ABC):
             adapter
         )
 
+    # 아래 메서드들을 추상 메서드로 지정, 하위 클래스가 반드시 구현하도록 강제한다.
     @abstractmethod
     def crawl(self, url):
         pass
