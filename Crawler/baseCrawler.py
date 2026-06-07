@@ -5,6 +5,7 @@ import HTTPAdapter
 from abc import ABC, abstractmethod # Abstract Base Classes
 
 # baseCrawler를 추상 클래스로 설정, 객체 생성을 금지시킨다.
+# baseCrawler는 Crawler 객체들의 설계도일뿐, 실제로 사용할 객체가 아니다.
 class baseCrawler(ABC):
 
     def __init__(self):
