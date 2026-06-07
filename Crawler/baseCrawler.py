@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import Retry
 import HTTPAdapter
+from abc import ABC, abstractmethod # Abstract Base Classes
 
-
-class Crawler:
+# baseCrawler를 추상 클래스로 설정, 객체 생성을 금지시킨다.
+class baseCrawler(ABC):
 
     def __init__(self):
         self.session = requests.Session()
@@ -35,7 +36,7 @@ class Crawler:
             max_retries = retry
         )
 
-        # m
+        # mount 메서드로 특정 URL 형식에 사용할 Adapter를 정한다.(미정 시 기본)
         self.session.mount(
             'https://',
             adapter
@@ -45,3 +46,13 @@ class Crawler:
             'http://',
             adapter
         )
+
+    @abstractmethod
+    def crawl(self, url):
+        pass
+    
+    @abstractmethod
+    def parsing(self, response):
+        pass
+    
+
