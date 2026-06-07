@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import Retry
 import HTTPAdapter
-from abc import ABC, abstractmethod # Abstract Base Classes
+from abc import ABC, abstractmethod # Abstract Base Classes, ABC와 abstractmethod는 같이 쓰인다.
 
 # baseCrawler를 추상 클래스로 설정, 객체 생성을 금지시킨다.
 # baseCrawler는 Crawler 객체들의 설계도일뿐, 실제로 사용할 객체가 아니다.
