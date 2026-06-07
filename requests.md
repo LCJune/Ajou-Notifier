@@ -1,9 +1,24 @@
-## requests
+# requests
 ```python
 import request
 ```
 Python에서 HTTP 요청을 보내기 위해 가장 널리 쓰이는 라이브러리이다.
-requests는 모듈 전체를 의미하며, 그 안에 핵심적인 역할을 하는 Response 클래스와 Session 클래스 등이 포함되어 있다.  
+requests는 모듈 전체를 의미하며, 그 안에 핵심적인 역할을 하는 Response 클래스와 Session 클래스 등이 포함되어 있다.
+
+단, requests 객체 자체는 HTTP 요청 관리자를 의미한다.
+실제 웹 통신은 다음과 같은 계층으로 이루어진다.
+1. requests 객체(requests, Session...)의 통신 요청
+2. URL 분석
+3. mount 테이블 조회
+4. URL 형식에 맞는 Adatper 선택
+5. Adatper.send() 요청
+6. urlib3
+7. TCP 연결
+8. HTTP 요청
+9. Response 생성
+10. requests 객체로 반환
+11. Response 변수에 저장
+
 <br/> 
 
 ### 주요 메서드
