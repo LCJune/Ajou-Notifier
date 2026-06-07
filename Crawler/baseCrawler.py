@@ -54,7 +54,7 @@ class baseCrawler(ABC):
         pass
     
     @abstractmethod
-    def parsing(self, response):
+    def parse(self, response):
         pass
     
 
