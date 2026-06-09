@@ -69,7 +69,7 @@ def check_and_notify():
     # 2. 최신 데이터 가져오기
     url = "https://www.ajou.ac.kr/kr/ajou/notice-calendar.do?mode=calendar&boardNo=1021"
     res = requests.get(url)
-    data = res.json().get('data', [])
+    data = res.json().get('data', []) # JSON 응답에서 'data' 키의 값 가져오기
 
     now = datetime.now()
     has_new = False
