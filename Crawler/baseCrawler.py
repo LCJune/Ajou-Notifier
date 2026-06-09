@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import Retry
-import HTTPAdapter
+from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter
 from abc import ABC, abstractmethod # Abstract Base Classes, ABC와 abstractmethod는 같이 쓰인다.
 
 # baseCrawler를 추상 클래스로 설정, 객체 생성을 금지시킨다.
@@ -16,7 +16,7 @@ class baseCrawler(ABC):
             "User-Agent": "Mozilla/5.0 ..." # header가 없으면 사용자를 확인하는 특정 웹 사이트들은 접속이 불가능하다.
         })
 
-        # HTTP 요청 실패 시 재시도 조건 설정
+        # HTTP 요청 실패 시 재시도 조건 설정을 담은 Retry 객체 생성
         retry = Retry(
             total=3, # 총 3번 재시도
             backoff_factor=0.3, # 재시도 간격
