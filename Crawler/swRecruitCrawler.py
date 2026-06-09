@@ -3,11 +3,11 @@ from bs4 import BeautifulSoup
 
 from baseCrawler import baseCrawler
 
-class scholarshipCrawler(baseCrawler):
+class swRecruitCrawler(baseCrawler):
     
     def __init__(self):
         super().__init__()
-        self.url = "https://www.ajou.ac.kr/kr/ajou/notice_scholarship.do"
+        self.url = "https://software.ajou.ac.kr/bbs/board.php?tbl=bbs02"
         
     def _crawl(self):
         try:

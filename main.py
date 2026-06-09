@@ -150,8 +150,8 @@ def get_scholar_notices():
     
   try:
     res = session.get(url, headers=headers, timeout=20)
-    res.encoding = res.apparent_encoding
-    soup = BeautifulSoup(res.text, 'html.parser')
+    res.encoding = res.apparent_encoding # 실제 페이지의 인코딩 방식 추정해서 사용
+    soup = BeautifulSoup(res.text, 'html.parser') 
     tr_list = soup.find_all('tr', class_='')
 
     new_posts = []
