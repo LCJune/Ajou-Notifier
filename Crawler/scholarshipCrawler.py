@@ -60,7 +60,6 @@ class scholarshipCrawler(baseCrawler):
                     link=link
                 )
             )
-        print(notices[0].id, notices[0].source, notices[0].title, notices[0].date_posted, notices[0].link)
         return notices
     
     def get_notices(self):
@@ -69,6 +68,3 @@ class scholarshipCrawler(baseCrawler):
             return self._parse(data)
         else:
             return []
-
-sc = scholarshipCrawler()
-notices = sc.get_notices()

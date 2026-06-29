@@ -59,5 +59,3 @@ class swRecruitCrawler(baseCrawler):
         else:
             return []
         
-sc = swRecruitCrawler()
-sc.get_notices()

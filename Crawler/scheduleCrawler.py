@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+from datetime import datetime
 
-from baseCrawler import baseCrawler
+from Crawler.baseCrawler import baseCrawler
+from models.Schedule import Schedule
 
 class scheduleCrawler(baseCrawler): # 부모 클래스를 괄호에 넣으면 자식 클래스가 된다.
     
@@ -22,16 +24,15 @@ class scheduleCrawler(baseCrawler): # 부모 클래스를 괄호에 넣으면 �
             return None
         
     def _parse(self, data):    
-        notices = []
-        for item in data:
-            notices.append({
-                'id': item['articleNo'],
-                'title': item['articleTitle'],
-                'startDate': item['start'],
-                'endDate': item['end'],
-            })
-        print(notices[0])
-        return notices
+        schedule = []
+        for notice in data:
+            schedule.append(Schedule(
+                id = notice['articleNo'],
+                title=notice['articleTitle'],
+                startDate = datetime.strptime(notice['start'], "%Y-%m-%d").date(),
+                endDate = datetime.strptime(notice['end'], "%Y-%m-%d").date()
+            ))
+        return schedule
     
     def get_notices(self):
         data = self._crawl()
@@ -39,6 +40,3 @@ class scheduleCrawler(baseCrawler): # 부모 클래스를 괄호에 넣으면 �
             return self._parse(data)
         else:
             return []
-
-sc = scheduleCrawler()
-sc.get_notices()
