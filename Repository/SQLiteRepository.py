@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date, timedelta
 
 class SQLiteRepository:
     def __init__(self, db_path = "database/sqliteNotice.db"):
@@ -16,6 +17,13 @@ class SQLiteRepository:
         )
         """)
         # primary key : 기본 키, not null: 비워져 있을 수 없음(null일 수 없음) 
+
+        cutoff = (date.today() - timedelta(days=365)).isoformat()
+        self.cursor.execute(
+            "DELETE FROM notifications WHERE Date < ?",
+            (cutoff,)
+        )
+        self.conn.commit()
         
     def exsist(self, notice_id):
         

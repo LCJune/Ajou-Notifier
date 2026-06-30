@@ -15,17 +15,31 @@ swRecruit_Notices = swReCrawler.get_notices()
 
 sql = SQLiteRepository(db_path= "database/sqliteNotice.db")
 
+
+
 scholar_filtered = []
 for notice in scholar_Notices:
     if not sql.exsist(notice.id):
         scholar_filtered.append(notice)
-        sql.insert(notice.id, notice.source, notice.title, notice.date_posted, notice.link)
+        sql.insert(
+            notice_id = notice.id, 
+            source = notice.source, 
+            title = notice.title, 
+            date = notice.date_posted, 
+            link = notice.link
+        )
 
 swRecruit_filtered = []
 for notice in swRecruit_Notices:
     if not sql.exsist(notice.id):
         swRecruit_filtered.append(notice)
-        sql.insert(notice.id, notice.source, notice.title, notice.date_posted, notice.link)
+        sql.insert(
+            notice_id = notice.id, 
+            source = notice.source, 
+            title = notice.title, 
+            date = notice.date_posted, 
+            link =notice.link
+        )
 
 sql.close()
 
