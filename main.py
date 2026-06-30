@@ -19,12 +19,16 @@ scholar_filtered = []
 for notice in scholar_Notices:
     if not sql.exsist(notice.id):
         scholar_filtered.append(notice)
+        sql.insert(notice.id, notice.source, notice.title, notice.date_posted, notice.link)
 
 swRecruit_filtered = []
 for notice in swRecruit_Notices:
     if not sql.exsist(notice.id):
         swRecruit_filtered.append(notice)
-        
+        sql.insert(notice.id, notice.source, notice.title, notice.date_posted, notice.link)
+
+sql.close()
+
 
 # 모듈.클래스.staticmethod
 scheMessage = scheduleFormatter.scheduleFormatter.format(schedules)
@@ -34,3 +38,4 @@ swReMessage = noticeFormatter.noticeFormatter.format(swRecruit_filtered)
 
 message = scheMessage + "\n" + scholarshipMessage + "\n" + swReMessage
 slack.send_message(message)
+

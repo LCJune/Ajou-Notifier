@@ -1,7 +1,7 @@
 import sqlite3
 
 class SQLiteRepository:
-    def __init__(self, db_path):
+    def __init__(self, db_path = "database/sqliteNotice.db"):
         self.db_path = db_path
         self.conn = sqlite3.connect(self.db_path) # sqlite3.connect() : 데이터베이스 연결 객체를 생성
         self.cursor = self.conn.cursor() # SQL을 실행하는 객체
