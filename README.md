@@ -11,3 +11,18 @@
 ### 3. SQLite
 읽어 온 공지들의 정보를 저장하고 관리하기 위해 사용
  
+## Class 역할
+### Notice
+공지의 정보를 담는 class
+
+### Schedule
+일정에 대한 정보를 담는 class
+
+### Crawler
+http 사이트로부터 html 정보를 crawling해온 후, parsing하여 반환함.
+
+### Formatter
+전달받은 객체가 Notice인지, Schedule인지에 따라 알맞은 형식의 문자열을 제작함.
+
+### SQLiteRepository
+SQLite 객체의 생성 및 DB 조작을 담당하는 class
